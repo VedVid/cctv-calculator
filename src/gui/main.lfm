@@ -3,7 +3,7 @@ object Form1: TForm1
   Height = 602
   Top = 109
   Width = 466
-  Caption = 'CCTV Calculator'
+  Caption = 'CCTV Calculator v1.0'
   ClientHeight = 602
   ClientWidth = 466
   Position = poScreenCenter
