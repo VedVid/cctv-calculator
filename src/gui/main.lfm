@@ -1,0 +1,367 @@
+object Form1: TForm1
+  Left = 866
+  Height = 602
+  Top = 223
+  Width = 466
+  Caption = 'CCTV Calculator'
+  ClientHeight = 602
+  ClientWidth = 466
+  Position = poScreenCenter
+  LCLVersion = '2.0.8.0'
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 600
+    Top = 0
+    Width = 464
+    ActivePage = ImageSizeTabSheet
+    TabIndex = 0
+    TabOrder = 0
+    object ImageSizeTabSheet: TTabSheet
+      Caption = 'Image size'
+      ClientHeight = 572
+      ClientWidth = 456
+      object ResolutionGroupBox: TGroupBox
+        Left = 0
+        Height = 200
+        Top = 8
+        Width = 448
+        Caption = 'Resolution'
+        ClientHeight = 180
+        ClientWidth = 444
+        TabOrder = 0
+        object QcifRadio: TRadioButton
+          Left = 16
+          Height = 19
+          Top = 8
+          Width = 121
+          Caption = 'QCIF (176 x 120 px)'
+          Checked = True
+          OnEnter = QcifRadioEnter
+          TabOrder = 12
+          TabStop = True
+        end
+        object CifRadio: TRadioButton
+          Left = 16
+          Height = 19
+          Top = 32
+          Width = 112
+          Caption = 'CIF (352 x 240 px)'
+          OnEnter = CifRadioEnter
+          TabOrder = 0
+        end
+        object FourCifRadio: TRadioButton
+          Left = 16
+          Height = 19
+          Top = 56
+          Width = 118
+          Caption = '4CIF (704 x 480 px)'
+          OnEnter = FourCifRadioEnter
+          TabOrder = 1
+        end
+        object D1Radio: TRadioButton
+          Left = 16
+          Height = 19
+          Top = 80
+          Width = 109
+          Caption = 'D1 (720 x 480 px)'
+          OnEnter = D1RadioEnter
+          TabOrder = 2
+        end
+        object Mpix1Radio: TRadioButton
+          Left = 16
+          Height = 19
+          Top = 104
+          Width = 137
+          Caption = '1 Mpix (1280 x 720 px)'
+          OnEnter = Mpix1RadioEnter
+          TabOrder = 3
+        end
+        object Mpix2Radio: TRadioButton
+          Left = 16
+          Height = 19
+          Top = 128
+          Width = 143
+          Caption = '2 Mpix (1920 x 1080 px)'
+          OnEnter = Mpix2RadioEnter
+          TabOrder = 4
+        end
+        object Mpix3Radio: TRadioButton
+          Left = 16
+          Height = 19
+          Top = 152
+          Width = 143
+          Caption = '3 Mpix (2048 x 1536 px)'
+          OnEnter = Mpix3RadioEnter
+          TabOrder = 5
+        end
+        object Mpix4Radio: TRadioButton
+          Left = 256
+          Height = 19
+          Top = 8
+          Width = 143
+          Caption = '4 Mpix (2560 x 1440 px)'
+          OnEnter = Mpix4RadioEnter
+          TabOrder = 6
+        end
+        object Mpix5Radio: TRadioButton
+          Left = 256
+          Height = 19
+          Top = 32
+          Width = 143
+          Caption = '5 Mpix (2592 x 1944 px)'
+          OnEnter = Mpix5RadioEnter
+          TabOrder = 7
+        end
+        object Mpix6Radio: TRadioButton
+          Left = 256
+          Height = 19
+          Top = 56
+          Width = 143
+          Caption = '6 Mpix (3072 x 2048 px)'
+          OnEnter = Mpix6RadioEnter
+          TabOrder = 8
+        end
+        object Mpix8Radio: TRadioButton
+          Left = 256
+          Height = 19
+          Top = 80
+          Width = 143
+          Caption = '8 Mpix (3840 x 2160 px)'
+          OnEnter = Mpix8RadioEnter
+          TabOrder = 9
+        end
+        object Mpix12Radio: TRadioButton
+          Left = 256
+          Height = 19
+          Top = 104
+          Width = 149
+          Caption = '12 Mpix (4000 x 3000 px)'
+          OnEnter = Mpix12RadioEnter
+          TabOrder = 10
+        end
+        object Mpix16Radio: TRadioButton
+          Left = 256
+          Height = 19
+          Top = 128
+          Width = 149
+          Caption = '16 Mpix (4592 x 3056 px)'
+          OnEnter = Mpix16RadioEnter
+          TabOrder = 11
+        end
+      end
+      object QualityGroupBox: TGroupBox
+        Left = 0
+        Height = 57
+        Top = 216
+        Width = 448
+        Caption = 'Quality'
+        ClientHeight = 37
+        ClientWidth = 444
+        TabOrder = 1
+        object LowQualityRadio: TRadioButton
+          Left = 16
+          Height = 19
+          Top = 8
+          Width = 42
+          Caption = 'Low'
+          Checked = True
+          OnEnter = LowQualityRadioEnter
+          TabOrder = 2
+          TabStop = True
+        end
+        object MediumQualityRadio: TRadioButton
+          Left = 136
+          Height = 19
+          Top = 8
+          Width = 65
+          Caption = 'Medium'
+          OnEnter = MediumQualityRadioEnter
+          TabOrder = 0
+        end
+        object HighQualityRadio: TRadioButton
+          Left = 256
+          Height = 19
+          Top = 8
+          Width = 46
+          Caption = 'High'
+          OnEnter = HighQualityRadioEnter
+          TabOrder = 1
+        end
+      end
+      object CompressionGroupBox: TGroupBox
+        Left = 0
+        Height = 89
+        Top = 288
+        Width = 448
+        Caption = 'Compression'
+        ClientHeight = 69
+        ClientWidth = 444
+        TabOrder = 2
+        object MjpegRadio: TRadioButton
+          Left = 16
+          Height = 19
+          Top = 8
+          Width = 56
+          Caption = 'MJPEG'
+          Checked = True
+          OnExit = MjpegRadioExit
+          TabOrder = 5
+          TabStop = True
+        end
+        object Mpeg2Radio: TRadioButton
+          Left = 136
+          Height = 19
+          Top = 8
+          Width = 63
+          Caption = 'MPEG-2'
+          OnExit = Mpeg2RadioExit
+          TabOrder = 0
+        end
+        object Mpeg4Radio: TRadioButton
+          Left = 256
+          Height = 19
+          Top = 8
+          Width = 63
+          Caption = 'MPEG-4'
+          OnExit = Mpeg4RadioExit
+          TabOrder = 1
+        end
+        object h264Radio: TRadioButton
+          Left = 16
+          Height = 19
+          Top = 40
+          Width = 48
+          Caption = 'h.264'
+          OnExit = h264RadioExit
+          TabOrder = 2
+        end
+        object h265Radio: TRadioButton
+          Left = 136
+          Height = 19
+          Top = 40
+          Width = 48
+          Caption = 'h.265'
+          OnExit = h265RadioExit
+          TabOrder = 3
+        end
+        object h265PlusRadio: TRadioButton
+          Left = 256
+          Height = 19
+          Top = 40
+          Width = 56
+          Caption = 'h.265+'
+          OnExit = h265PlusRadioExit
+          TabOrder = 4
+        end
+      end
+      object NumberOfCamerasGroupBox: TGroupBox
+        Left = 232
+        Height = 80
+        Top = 392
+        Width = 216
+        Caption = 'Number of cameras (1-15): 1'
+        ClientHeight = 60
+        ClientWidth = 212
+        TabOrder = 3
+        object NumberOfCamerasTrackBar: TTrackBar
+          Left = 8
+          Height = 25
+          Top = 8
+          Width = 200
+          Max = 16
+          Min = 1
+          OnChange = NumberOfCamerasTrackBarChange
+          Position = 1
+          TabOrder = 0
+        end
+        object Label3: TLabel
+          Left = 3
+          Height = 15
+          Top = 32
+          Width = 34
+          Alignment = taCenter
+          AutoSize = False
+          Caption = '1'
+          ParentColor = False
+        end
+        object Label4: TLabel
+          Left = 178
+          Height = 15
+          Top = 32
+          Width = 34
+          Alignment = taCenter
+          AutoSize = False
+          Caption = '15'
+          ParentColor = False
+        end
+      end
+      object CalculateButton: TButton
+        Left = 0
+        Height = 25
+        Top = 488
+        Width = 448
+        Caption = 'Calculate!'
+        OnClick = CalculateButtonClick
+        TabOrder = 4
+      end
+      object FpsGroupBox: TGroupBox
+        Left = 0
+        Height = 80
+        Top = 392
+        Width = 216
+        Caption = 'FPS (1-30): 1'
+        ClientHeight = 60
+        ClientWidth = 212
+        TabOrder = 5
+        object FpsTrackBar: TTrackBar
+          Left = 8
+          Height = 25
+          Top = 8
+          Width = 200
+          Max = 30
+          Min = 1
+          OnChange = FpsTrackBarChange
+          Position = 1
+          TabOrder = 0
+        end
+        object Label1: TLabel
+          Left = 6
+          Height = 15
+          Top = 32
+          Width = 28
+          Alignment = taCenter
+          AutoSize = False
+          Caption = '1'
+          ParentColor = False
+        end
+        object Label2: TLabel
+          Left = 187
+          Height = 15
+          Top = 32
+          Width = 18
+          Alignment = taCenter
+          AutoSize = False
+          Caption = '30'
+          ParentColor = False
+        end
+      end
+      object BitratePerCameraLabel: TLabel
+        Left = 0
+        Height = 15
+        Top = 528
+        Width = 102
+        Caption = 'Bitrate per camera: '
+        ParentColor = False
+        Visible = False
+      end
+      object TotalBitrateLabel: TLabel
+        Left = 37
+        Height = 15
+        Top = 552
+        Width = 65
+        Caption = 'Total bitrate:'
+        ParentColor = False
+      end
+    end
+  end
+end
