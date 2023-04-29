@@ -352,14 +352,13 @@ object Form1: TForm1
         Width = 102
         Caption = 'Bitrate per camera: '
         ParentColor = False
-        Visible = False
       end
       object TotalBitrateLabel: TLabel
-        Left = 37
+        Left = 34
         Height = 15
         Top = 552
-        Width = 65
-        Caption = 'Total bitrate:'
+        Width = 68
+        Caption = 'Total bitrate: '
         ParentColor = False
       end
     end

@@ -104,9 +104,9 @@ begin
   flags := '-r ' + Resolution + ' -c ' + Compression + ' -q ' + Quality + ' -f ' + FPS + ' -m ' + NumberOfCameras;
   SysUtils.ExecuteProcess('./cameras_bandwidth_calculator.exe', flags, []);
   strs := tStringList.Create;
-  strs.LoadFromFile('finished_cameras_bandwidth_calculator.csv');
-  Form1.BitratePerCameraLabel.Caption := 'Bitrate per camera: ' + strs[1].Split(',')[0] + ' Mbps';
-  Form1.TotalBitrateLabel.Caption := 'Total bitrate: ' + strs[1].Split(',')[2] + ' Mbps';
+  strs.LoadFromFile('cameras_bandwidth.csv');
+  Form1.BitratePerCameraLabel.Caption := 'Bitrate per camera: ' + strs[0].Split(',')[0] + ' Mbps';
+  Form1.TotalBitrateLabel.Caption := 'Total bitrate: ' + strs[0].Split(',')[1] + ' Mbps';
 end;
 
 
