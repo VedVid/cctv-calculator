@@ -116,9 +116,9 @@ begin
   Resolution := 'CIF';
 end;
 
-procedure TForm1.D1RadioEnter(Sender: TObject);
+procedure TForm1.QcifRadioEnter(Sender: TObject);
 begin
-  Resolution := 'D1';
+  Resolution := 'QCIF';
 end;
 
 procedure TForm1.FourCifRadioEnter(Sender: TObject);
@@ -126,59 +126,54 @@ begin
   Resolution := '4CIF';
 end;
 
+procedure TForm1.D1RadioEnter(Sender: TObject);
+begin
+  Resolution := 'D1';
+end;
+
 procedure TForm1.Mpix12RadioEnter(Sender: TObject);
 begin
-  Resolution := '12 Mpix';
+  Resolution := '"12 Mpix"';
 end;
 
 procedure TForm1.Mpix16RadioEnter(Sender: TObject);
 begin
-  Resolution := '16 Mpix';
+  Resolution := '"16 Mpix"';
 end;
 
 procedure TForm1.Mpix1RadioEnter(Sender: TObject);
 begin
-  Resolution := '1 Mpix';
+  Resolution := '"1 Mpix"';
 end;
 
 procedure TForm1.Mpix2RadioEnter(Sender: TObject);
 begin
-  Resolution := '2 Mpix';
+  Resolution := '"2 Mpix"';
 end;
 
 procedure TForm1.Mpix3RadioEnter(Sender: TObject);
 begin
-  Resolution := '3 Mpix';
+  Resolution := '"3 Mpix"';
 end;
 
 procedure TForm1.Mpix4RadioEnter(Sender: TObject);
 begin
-  Resolution := '4 Mpix';
+  Resolution := '"4 Mpix"';
 end;
 
 procedure TForm1.Mpix5RadioEnter(Sender: TObject);
 begin
-  Resolution := '5 Mpix';
+  Resolution := '"5 Mpix"';
 end;
 
 procedure TForm1.Mpix6RadioEnter(Sender: TObject);
 begin
-  Resolution := '6 Mpix';
+  Resolution := '"6 Mpix"';
 end;
 
 procedure TForm1.Mpix8RadioEnter(Sender: TObject);
 begin
-  Resolution := '8 Mpix';
-end;
-
-procedure TForm1.QcifRadioEnter(Sender: TObject);
-begin
-  Resolution := '9 Mpix';
-end;
-
-procedure TForm1.TrackBar1Change(Sender: TObject);
-begin
-
+  Resolution := '"8 Mpix"';
 end;
 
 procedure TForm1.LowQualityRadioEnter(Sender: TObject);
