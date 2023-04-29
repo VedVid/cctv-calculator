@@ -76,7 +76,6 @@ type
     procedure Mpix8RadioEnter(Sender: TObject);
     procedure NumberOfCamerasTrackBarChange(Sender: TObject);
     procedure QcifRadioEnter(Sender: TObject);
-    procedure TrackBar1Change(Sender: TObject);
   private
 
   public
