@@ -20,6 +20,13 @@ type
     Label3: TLabel;
     Label4: TLabel;
     BitratePerCameraLabel: TLabel;
+    StartScreenAbout4Label: TLabel;
+    StartScreenAbout3Label: TLabel;
+    StartScreenAbout2Label: TLabel;
+    StartScreenLogo1Label: TLabel;
+    StartScreenLogo2Label: TLabel;
+    StartScreenAbout1Label: TLabel;
+    StartScreenTabSheet: TTabSheet;
     TotalBitrateLabel: TLabel;
     NumberOfCamerasGroupBox: TGroupBox;
     ResolutionGroupBox: TGroupBox;
