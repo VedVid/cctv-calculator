@@ -6,20 +6,40 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  ExtCtrls, StdCtrls;
+  ExtCtrls, StdCtrls, Menus, Spin;
 
 type
 
   { TMainForm }
 
   TMainForm = class(TForm)
+    CalculateButton2: TButton;
     CalculateButton: TButton;
     FpsGroupBox: TGroupBox;
+    InstallationDataGroupBox: TGroupBox;
+    AverageDistanceLabel: TLabel;
+    TransmittersDataLabel: TLabel;
+    NumberOfReceiversLabel: TLabel;
+    NumberOfTransmittersLabel: TLabel;
+    MaxDistanceLabel: TLabel;
+    NumberOfReceiversSpinEdit: TSpinEdit;
+    AverageDistanceSpinEdit: TSpinEdit;
+    TotalBitrateLabel2: TLabel;
+    TotalCamerasLabel: TLabel;
+    ModelLabel: TLabel;
+    ManufacturerLabel: TLabel;
+    SelectTransmitterGroupBox: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     BitratePerCameraLabel: TLabel;
+    SelectModelListBox: TListBox;
+    SelectManufacturerListBox: TListBox;
+    NumberOfCamerasSpinEdit: TSpinEdit;
+    TotalBitrateSpinEdit: TSpinEdit;
+    MaxDistanceSpinEdit: TSpinEdit;
+    NumberOfTransmittersSpinEdit: TSpinEdit;
     StartScreenAbout4Label: TLabel;
     StartScreenAbout3Label: TLabel;
     StartScreenAbout2Label: TLabel;
@@ -27,6 +47,7 @@ type
     StartScreenLogo2Label: TLabel;
     StartScreenAbout1Label: TLabel;
     StartScreenTabSheet: TTabSheet;
+    TransmittersTabSheet: TTabSheet;
     TotalBitrateLabel: TLabel;
     NumberOfCamerasGroupBox: TGroupBox;
     ResolutionGroupBox: TGroupBox;
@@ -58,6 +79,8 @@ type
     ImageSizeTabSheet: TTabSheet;
     NumberOfCamerasTrackBar: TTrackBar;
     FpsTrackBar: TTrackBar;
+    procedure AverageDistanceSpinEditChange(Sender: TObject);
+    procedure CalculateButton2Click(Sender: TObject);
     procedure CalculateButtonClick(Sender: TObject);
     procedure CifRadioEnter(Sender: TObject);
     procedure D1RadioEnter(Sender: TObject);
@@ -68,6 +91,7 @@ type
     procedure h265RadioExit(Sender: TObject);
     procedure HighQualityRadioEnter(Sender: TObject);
     procedure LowQualityRadioEnter(Sender: TObject);
+    procedure MaxDistanceSpinEditChange(Sender: TObject);
     procedure MediumQualityRadioEnter(Sender: TObject);
     procedure MjpegRadioExit(Sender: TObject);
     procedure Mpeg2RadioExit(Sender: TObject);
@@ -81,8 +105,15 @@ type
     procedure Mpix5RadioEnter(Sender: TObject);
     procedure Mpix6RadioEnter(Sender: TObject);
     procedure Mpix8RadioEnter(Sender: TObject);
+    procedure NumberOfCamerasSpinEditChange(Sender: TObject);
     procedure NumberOfCamerasTrackBarChange(Sender: TObject);
+    procedure NumberOfReceiversSpinEditChange(Sender: TObject);
+    procedure NumberOfTransmittersSpinEditChange(Sender: TObject);
     procedure QcifRadioEnter(Sender: TObject);
+    procedure SelectManufacturerListBoxSelectionChange(Sender: TObject;
+      User: boolean);
+    procedure TotalBitrateSpinEditChange(Sender: TObject);
+
   private
 
   public
@@ -91,11 +122,31 @@ type
 
 var
   MainForm: TMainForm;
+
   Resolution: String = 'QCIF';
   Quality: String = 'Low';
   Compression: String = 'MJPEG';
   FPS: String = '1';
   NumberOfCameras: String = '1';
+
+  CurrentManufacturer: Ansistring = '';
+  CurrentModel: Ansistring = '';
+  Manufacturers: Array [0..1] of Ansistring = ('CAMSAT', 'Ubiquity');
+  CamsatModels: Array [0..7] of Ansistring = ('CAM-5816h',
+                                              'CAM-Analog2.0',
+                                              'CDS-6IP 3PoE',
+                                              'CDS-6IP eco',
+                                              'CDS-6IP Multi',
+                                              'CDS-EasyIP eco',
+                                              'CDS-EasyIP PoE',
+                                              'TCO-5807h');
+  NumberOfCameras2: String = '1';
+  TotalBitrate2: String = '1';
+  NumberOfTransmitters: String = '1';
+  NumberOfReceivers: String = '1';
+  MaxDistance: String = '0';
+  AverageDistance: String = '0';
+
 
 implementation
 
@@ -116,6 +167,22 @@ begin
   MainForm.TotalBitrateLabel.Caption := 'Total bitrate: ' + strs[0].Split(',')[1] + ' Mbps';
 end;
 
+procedure TMainForm.AverageDistanceSpinEditChange(Sender: TObject);
+begin
+  AverageDistance := IntToStr(MainForm.AverageDistanceSpinEdit.Value);
+end;
+
+procedure TMainForm.CalculateButton2Click(Sender: TObject);
+var
+  flags: String = '';
+  strs: TStringList;
+begin
+  flags := '-m ' + NumberOfCameras2 + ' -b ' + TotalBitrate2 + ' -t ' + NumberOfTransmitters + ' -e ' + NumberOfReceivers + ' -d ' + MaxDistance + ' -i ' + AverageDistance;
+  SysUtils.ExecuteProcess('./cameras_bandwidth_calculator.exe', flags, []);
+  strs := TStringList.Create;
+  strs.LoadFromFile('transmission_data.csv');
+end;
+
 
 procedure TMainForm.CifRadioEnter(Sender: TObject);
 begin
@@ -125,6 +192,23 @@ end;
 procedure TMainForm.QcifRadioEnter(Sender: TObject);
 begin
   Resolution := 'QCIF';
+end;
+
+procedure TMainForm.SelectManufacturerListBoxSelectionChange(Sender: TObject;
+  User: boolean);
+var
+  model: string;
+begin
+  CurrentManufacturer := MainForm.SelectManufacturerListBox.Items[MainForm.SelectManufacturerListBox.ItemIndex];
+  MainForm.SelectModelListBox.Clear;
+  if CurrentManufacturer = 'CAMSAT' then
+    for model in CamsatModels do
+      MainForm.SelectModelListBox.Items.Add(model);
+end;
+
+procedure TMainForm.TotalBitrateSpinEditChange(Sender: TObject);
+begin
+  TotalBitrate2 := IntToStr(MainForm.TotalBitrateSpinEdit.Value);
 end;
 
 procedure TMainForm.FourCifRadioEnter(Sender: TObject);
@@ -182,9 +266,19 @@ begin
   Resolution := '"8 Mpix"';
 end;
 
+procedure TMainForm.NumberOfCamerasSpinEditChange(Sender: TObject);
+begin
+  NumberOfCameras2 := IntToStr(MainForm.NumberOfCamerasSpinEdit.Value);
+end;
+
 procedure TMainForm.LowQualityRadioEnter(Sender: TObject);
 begin
   Quality := 'Low';
+end;
+
+procedure TMainForm.MaxDistanceSpinEditChange(Sender: TObject);
+begin
+  MaxDistance := IntToStr(MaxDistanceSpinEdit.Value);
 end;
 
 procedure TMainForm.MediumQualityRadioEnter(Sender: TObject);
@@ -237,6 +331,16 @@ procedure TMainForm.NumberOfCamerasTrackBarChange(Sender: TObject);
 begin
   NumberOfCameras := AnsiString(IntToStr(MainForm.NumberOfCamerasTrackBar.Position));
   MainForm.NumberOfCamerasGroupBox.Caption := 'Number of cameras (1-15): ' + NumberOfCameras;
+end;
+
+procedure TMainForm.NumberOfReceiversSpinEditChange(Sender: TObject);
+begin
+  NumberOfReceivers := IntToStr(MainForm.NumberOfReceiversSpinEdit.Value);
+end;
+
+procedure TMainForm.NumberOfTransmittersSpinEditChange(Sender: TObject);
+begin
+  NumberOfTransmitters := IntToStr(MainForm.NumberOfTransmittersSpinEdit.Value);
 end;
 
 end.
