@@ -2,7 +2,6 @@
 
 
 import argparse
-from datetime import datetime
 import logging
 import sqlite3
 
@@ -15,8 +14,8 @@ from app.sql_reader import SqlReader
 
 
 if __name__ == "__main__":
-    logging.basicConfig(filename=datetime.now().strftime('%Y%m%dT%H%M%S')+".log",
-                        filemode='a',
+    logging.basicConfig(filename="cctv_calculator.log",
+                        filemode='w',
                         format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                         datefmt='%H:%M:%S',
                         level=logging.INFO)
