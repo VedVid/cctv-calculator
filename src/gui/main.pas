@@ -180,7 +180,7 @@ begin
   flags := '-m ' + NumberOfCameras2 + ' -b ' + TotalBitrate2 + ' -t ' + NumberOfTransmitters + ' -e ' + NumberOfReceivers + ' -d ' + MaxDistance + ' -i ' + AverageDistance;
   SysUtils.ExecuteProcess('./cameras_bandwidth_calculator.exe', flags, []);
   strs := TStringList.Create;
-  strs.LoadFromFile('transmission_data.csv');
+  strs.LoadFromFile('transmitters_validation.csv');
 end;
 
 
