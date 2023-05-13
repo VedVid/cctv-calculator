@@ -7,6 +7,7 @@ import logging
 import sqlite3
 
 from app import bitrate_calculator
+from app import constants
 from app import transmission_validator
 from app.csv_writer import csv_transmitters_writer, csv_bitrate_writer
 from app.sql_connector import SqlConnector
@@ -40,8 +41,9 @@ if __name__ == "__main__":
     sql_reader = SqlReader(SqlConnector())
     sql_reader.connector.open()
     logging.info("    DONE.")
-    print(sql_reader.connector.con)
-    print(sql_reader.connector.cur)
+    if constants.PRINT_DEBUG:
+        print(sql_reader.connector.con)
+        print(sql_reader.connector.cur)
     bandwidth_caculator_args = (
         args.resolution,
         args.compression,
@@ -69,11 +71,9 @@ if __name__ == "__main__":
             logging.critical(f"No data fetched, operation aborted.\n    {e}")
         else:
             logging.info("    DONE.")
-            print(data)
             logging.info("Calculating...")
             result = bitrate_calculator.calculate(**data)
             logging.info("    DONE.")
-            print(result)
             logging.info("Writing data to csv file...")
             csv_bitrate_writer(result["per_camera"], result["total"])
             logging.info("    DONE.")
@@ -93,9 +93,6 @@ if __name__ == "__main__":
             logging.info("    DONE.")
             logging.info("Validating...")
             validation = transmission_validator.validate(**data)
-            import pprint
-
-            pprint.pprint(validation)
             logging.info("    DONE.")
             logging.info("Writing data to csv file...")
             csv_transmitters_writer(validation)

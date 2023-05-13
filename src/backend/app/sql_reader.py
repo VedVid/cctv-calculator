@@ -120,9 +120,6 @@ class SqlReader:
             (manufacturer, model),
         )
         data = self.connector.cur.fetchone()
-        print(
-            f"range_max: {data[0]}, value_max: {data[1]}, cameras: {data[2]}, max_tx_to_rx: {data[3]}, channels_all: {data[4]}, channels_ce: {data[5]}"
-        )
         d["max_distance_between_tx_and_rx"] = data[0]
         d["max_bitrate"] = data[1]
         d["max_cameras_for_single_transmitter"] = data[2]
