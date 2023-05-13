@@ -17,5 +17,15 @@ def csv_bitrate_writer(per_camera: float, total: float) -> None:
     """
 
     with open("cameras_bandwidth.csv", mode="w") as f:
-        f_writer = csv.writer(f, delimiter=",", quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        f_writer.writerow(['%.2f' % per_camera, '%.2f' % total])
+        f_writer = csv.writer(
+            f, delimiter=",", quotechar='"', quoting=csv.QUOTE_MINIMAL
+        )
+        f_writer.writerow(["%.2f" % per_camera, "%.2f" % total])
+
+
+def csv_transmitters_writer(comments: str) -> None:
+    with open("transmitters_validation.csv", mode="w") as f:
+        f_writer = csv.writer(
+            f, delimiter=";", quotechar='"', quoting=csv.QUOTE_MINIMAL
+        )
+        f_writer.writerow(comments)
