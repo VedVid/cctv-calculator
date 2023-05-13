@@ -177,10 +177,14 @@ var
   flags: String = '';
   strs: TStringList;
 begin
-  flags := '-m ' + NumberOfCameras2 + ' -b ' + TotalBitrate2 + ' -t ' + NumberOfTransmitters + ' -e ' + NumberOfReceivers + ' -d ' + MaxDistance + ' -i ' + AverageDistance + ' -a "' + CurrentManufacturer + '" -o "' + CurrentModel + '"';
+  flags := '-m ' + NumberOfCameras2 + ' -b ' + TotalBitrate2 + ' -t ' + NumberOfTransmitters + ' -e ' + NumberOfReceivers + ' -d ' + MaxDistance + ' -i ' + AverageDistance;
   SysUtils.ExecuteProcess('./cameras_bandwidth_calculator.exe', flags, []);
   strs := TStringList.Create;
+<<<<<<< HEAD
+  strs.LoadFromFile('transmission_data.csv');
+=======
   strs.LoadFromFile('transmitters_validation.csv');
+>>>>>>> gui-transmitters-tab
 end;
 
 
