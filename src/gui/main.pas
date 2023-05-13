@@ -18,6 +18,7 @@ type
     FpsGroupBox: TGroupBox;
     InstallationDataGroupBox: TGroupBox;
     AverageDistanceLabel: TLabel;
+    Label5: TLabel;
     TransmittersDataLabel: TLabel;
     NumberOfReceiversLabel: TLabel;
     NumberOfTransmittersLabel: TLabel;
@@ -112,6 +113,7 @@ type
     procedure QcifRadioEnter(Sender: TObject);
     procedure SelectManufacturerListBoxSelectionChange(Sender: TObject;
       User: boolean);
+    procedure SelectModelListBoxSelectionChange(Sender: TObject; User: boolean);
     procedure TotalBitrateSpinEditChange(Sender: TObject);
 
   private
@@ -177,7 +179,9 @@ var
   flags: String = '';
   strs: TStringList;
 begin
-  flags := '-m ' + NumberOfCameras2 + ' -b ' + TotalBitrate2 + ' -t ' + NumberOfTransmitters + ' -e ' + NumberOfReceivers + ' -d ' + MaxDistance + ' -i ' + AverageDistance + ' -a "' + CurrentManufacturer + '" -o "' + CurrentModel + '"';
+  flags := '--cameras ' + NumberOfCameras2 + ' --bitrate ' + TotalBitrate2 + ' --transmitters ' + NumberOfTransmitters + ' --receivers ' + NumberOfReceivers + ' --distancemax ' + MaxDistance + ' --distanceaverage ' + AverageDistance + ' --manufacturer "' + CurrentManufacturer + '" --model "' + CurrentModel + '"';
+  //flags := '-m ' + NumberOfCameras2 + ' -b ' + TotalBitrate2 + ' -t ' + NumberOfTransmitters + ' -e ' + NumberOfReceivers + ' -d ' + MaxDistance + ' -i ' + AverageDistance + ' -a "' + CurrentManufacturer + '" -o "' + CurrentModel + '"';
+  MainForm.Label5.Caption := flags;
   SysUtils.ExecuteProcess('./cameras_bandwidth_calculator.exe', flags, []);
   strs := TStringList.Create;
   strs.LoadFromFile('transmitters_validation.csv');
@@ -204,6 +208,13 @@ begin
   if CurrentManufacturer = 'CAMSAT' then
     for model in CamsatModels do
       MainForm.SelectModelListBox.Items.Add(model);
+  MainForm.SelectModelListBox.ItemIndex := 0;
+end;
+
+procedure TMainForm.SelectModelListBoxSelectionChange(Sender: TObject;
+  User: boolean);
+begin
+  CurrentModel := MainForm.SelectModelListBox.Items[MainForm.SelectModelListBox.ItemIndex];
 end;
 
 procedure TMainForm.TotalBitrateSpinEditChange(Sender: TObject);
