@@ -162,7 +162,7 @@ var
   strs: TStringList;
 begin
   DeleteFile('cameras_bandwidth.csv');
-  flags := '-r ' + Resolution + ' -c ' + Compression + ' -q ' + Quality + ' -f ' + FPS + ' -m ' + NumberOfCameras;
+  flags := '--resolution ' + Resolution + ' --compression ' + Compression + ' --quality ' + Quality + ' --fps ' + FPS + ' --cameras ' + NumberOfCameras;
   SysUtils.ExecuteProcess('./calcback.exe', flags, []);
   strs := tStringList.Create;
   strs.LoadFromFile('cameras_bandwidth.csv');
