@@ -208,9 +208,11 @@ begin
   CurrentManufacturer := MainForm.SelectManufacturerListBox.Items[MainForm.SelectManufacturerListBox.ItemIndex];
   MainForm.SelectModelListBox.Clear;
   if CurrentManufacturer = 'CAMSAT' then
-    for model in CamsatModels do
-      MainForm.SelectModelListBox.Items.Add(model);
-  MainForm.SelectModelListBox.ItemIndex := 0;
+    begin
+      for model in CamsatModels do
+        MainForm.SelectModelListBox.Items.Add(model);
+      MainForm.SelectModelListBox.ItemIndex := 0;
+    end;
 end;
 
 procedure TMainForm.SelectModelListBoxSelectionChange(Sender: TObject;
