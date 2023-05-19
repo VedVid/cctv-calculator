@@ -163,7 +163,7 @@ var
 begin
   DeleteFile('cameras_bandwidth.csv');
   flags := '-r ' + Resolution + ' -c ' + Compression + ' -q ' + Quality + ' -f ' + FPS + ' -m ' + NumberOfCameras;
-  SysUtils.ExecuteProcess('./cameras_bandwidth_calculator.exe', flags, []);
+  SysUtils.ExecuteProcess('./calcback.exe', flags, []);
   strs := tStringList.Create;
   strs.LoadFromFile('cameras_bandwidth.csv');
   MainForm.BitratePerCameraLabel.Caption := 'Bitrate per camera: ' + strs[0].Split(',')[0] + ' Mbps';
@@ -184,7 +184,7 @@ begin
   flags := '--cameras ' + NumberOfCameras2 + ' --bitrate ' + TotalBitrate2 + ' --transmitters ' + NumberOfTransmitters + ' --receivers ' + NumberOfReceivers + ' --distancemax ' + MaxDistance + ' --distanceaverage ' + AverageDistance + ' --manufacturer "' + CurrentManufacturer + '" --model "' + CurrentModel + '"';
   //flags := '-m ' + NumberOfCameras2 + ' -b ' + TotalBitrate2 + ' -t ' + NumberOfTransmitters + ' -e ' + NumberOfReceivers + ' -d ' + MaxDistance + ' -i ' + AverageDistance + ' -a "' + CurrentManufacturer + '" -o "' + CurrentModel + '"';
   MainForm.Label5.Caption := flags;
-  SysUtils.ExecuteProcess('./cameras_bandwidth_calculator.exe', flags, []);
+  SysUtils.ExecuteProcess('./calcback.exe', flags, []);
   strs := TStringList.Create;
   strs.LoadFromFile('transmitters_validation.csv');
 end;
