@@ -179,14 +179,17 @@ procedure TMainForm.CalculateButton2Click(Sender: TObject);
 var
   flags: String = '';
   strs: TStringList;
+  s: String = '';
 begin
   DeleteFile('transmitters_validation.csv');
+  MainForm.Label5.Caption := '';
   flags := '--cameras ' + NumberOfCameras2 + ' --bitrate ' + TotalBitrate2 + ' --transmitters ' + NumberOfTransmitters + ' --receivers ' + NumberOfReceivers + ' --distancemax ' + MaxDistance + ' --distanceaverage ' + AverageDistance + ' --manufacturer "' + CurrentManufacturer + '" --model "' + CurrentModel + '"';
   //flags := '-m ' + NumberOfCameras2 + ' -b ' + TotalBitrate2 + ' -t ' + NumberOfTransmitters + ' -e ' + NumberOfReceivers + ' -d ' + MaxDistance + ' -i ' + AverageDistance + ' -a "' + CurrentManufacturer + '" -o "' + CurrentModel + '"';
-  MainForm.Label5.Caption := flags;
   SysUtils.ExecuteProcess('./calcback.exe', flags, []);
   strs := TStringList.Create;
   strs.LoadFromFile('transmitters_validation.csv');
+  for s in strs do
+    MainForm.Label5.Caption := MainForm.Label5.Caption + LineEnding + s;
 end;
 
 

@@ -631,10 +631,9 @@ object MainForm: TMainForm
       end
       object Label5: TLabel
         Left = 0
-        Height = 15
-        Top = 336
-        Width = 34
-        Caption = 'Label5'
+        Height = 1
+        Top = 320
+        Width = 1
         ParentColor = False
       end
     end
