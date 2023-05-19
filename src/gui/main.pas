@@ -161,6 +161,7 @@ var
   flags: String = '';
   strs: TStringList;
 begin
+  DeleteFile('cameras_bandwidth.csv');
   flags := '-r ' + Resolution + ' -c ' + Compression + ' -q ' + Quality + ' -f ' + FPS + ' -m ' + NumberOfCameras;
   SysUtils.ExecuteProcess('./cameras_bandwidth_calculator.exe', flags, []);
   strs := tStringList.Create;
@@ -179,6 +180,7 @@ var
   flags: String = '';
   strs: TStringList;
 begin
+  DeleteFile('transmitters_validation.csv');
   flags := '--cameras ' + NumberOfCameras2 + ' --bitrate ' + TotalBitrate2 + ' --transmitters ' + NumberOfTransmitters + ' --receivers ' + NumberOfReceivers + ' --distancemax ' + MaxDistance + ' --distanceaverage ' + AverageDistance + ' --manufacturer "' + CurrentManufacturer + '" --model "' + CurrentModel + '"';
   //flags := '-m ' + NumberOfCameras2 + ' -b ' + TotalBitrate2 + ' -t ' + NumberOfTransmitters + ' -e ' + NumberOfReceivers + ' -d ' + MaxDistance + ' -i ' + AverageDistance + ' -a "' + CurrentManufacturer + '" -o "' + CurrentModel + '"';
   MainForm.Label5.Caption := flags;
