@@ -36,6 +36,8 @@ if __name__ == "__main__":
     argparser.add_argument("-o", "--model", type=str)
     args = argparser.parse_args()
     logging.info("    DONE.")
+    logging.info("The parameters passed:")
+    logging.info(f"    {args}.")
     logging.info("Connecting to the database...")
     sql_reader = SqlReader(SqlConnector())
     sql_reader.connector.open()
