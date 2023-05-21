@@ -8,7 +8,7 @@ import sqlite3
 from app import bitrate_calculator
 from app import constants
 from app import transmission_validator
-from app.csv_writer import csv_transmitters_writer, csv_bitrate_writer
+from app.csv_writer import csv_error_writer, csv_transmitters_writer, csv_bitrate_writer
 from app.sql_connector import SqlConnector
 from app.sql_reader import SqlReader
 
@@ -68,8 +68,10 @@ if __name__ == "__main__":
             data = sql_reader.read_image_data(*bandwidth_caculator_args)
         except sqlite3.OperationalError as e:
             logging.critical(f"Fetching data unsuccessful, operation aborted.\n    {e}")
+            csv_error_writer("Fetching data unsuccessful, operation aborted.", "cameras_bandwidth.csv")
         except TypeError as e:
-            logging.critical(f"No data fetched, operation aborted.\n    {e}")
+            logging.critical(f"No data fetched, operation aborted.")
+            csv_error_writer("No data fetched, operation aborted.", "cameras_bandwidth.csv")
         else:
             logging.info("    DONE.")
             logging.info("Calculating...")
@@ -88,8 +90,10 @@ if __name__ == "__main__":
             data = sql_reader.read_transmitters_data(*transmitters_calculator_args)
         except sqlite3.OperationalError as e:
             logging.critical(f"Fetching data unsuccessful, operation aborted.\n    {e}")
+            csv_error_writer("Fetching data unsuccessful, operation aborted.", "transmitters_validation.csv")
         except TypeError as e:
             logging.critical(f"No data fetched, operation aborted.\n    {e}")
+            csv_error_writer("No data fetched, operation aborted.", "transmitters_validation.csv")
         else:
             logging.info("    DONE.")
             logging.info("Validating...")
@@ -104,3 +108,7 @@ if __name__ == "__main__":
             logging.info("    DONE.")
     else:
         logging.critical("Arguments passed to the application do not match any available schema.")
+        csv_error_writer("Arguments passed to the application do not match any available schema.",
+                         "cameras_bandwidth.csv")
+        csv_error_writer("Arguments passed to the application do not match any available schema.",
+                         "transmitters_validation.csv")
