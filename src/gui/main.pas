@@ -180,6 +180,7 @@ var
   flags: String = '';
   strs: TStringList;
   s: String = '';
+  status: String;
 begin
   DeleteFile('transmitters_validation.csv');
   MainForm.Label5.Caption := '';
@@ -190,6 +191,9 @@ begin
   strs.LoadFromFile('transmitters_validation.csv');
   for s in strs do
     MainForm.Label5.Caption := MainForm.Label5.Caption + LineEnding + s;
+  status := Trim(MainForm.Label5.Caption);
+  if status = '' then
+    MainForm.Label5.Caption := 'OK';
 end;
 
 
