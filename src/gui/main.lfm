@@ -14,8 +14,8 @@ object MainForm: TMainForm
     Height = 600
     Top = 0
     Width = 464
-    ActivePage = TransmittersTabSheet
-    TabIndex = 2
+    ActivePage = AboutTabSheet
+    TabIndex = 3
     TabOrder = 0
     object StartScreenTabSheet: TTabSheet
       Caption = 'Start'
@@ -56,42 +56,6 @@ object MainForm: TMainForm
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
-      end
-      object StartScreenAbout1Label: TLabel
-        Left = 328
-        Height = 15
-        Top = 496
-        Width = 113
-        Alignment = taRightJustify
-        Caption = 'CCTV Calculator v 1.0'
-        ParentColor = False
-      end
-      object StartScreenAbout2Label: TLabel
-        Left = 310
-        Height = 15
-        Top = 512
-        Width = 131
-        Alignment = taRightJustify
-        Caption = '64-bit build for Windows'
-        ParentColor = False
-      end
-      object StartScreenAbout3Label: TLabel
-        Left = 229
-        Height = 15
-        Top = 528
-        Width = 212
-        Alignment = taRightJustify
-        Caption = 'Copyright (c) 2023, Tomasz Nowakowski'
-        ParentColor = False
-      end
-      object StartScreenAbout4Label: TLabel
-        Left = 214
-        Height = 15
-        Top = 544
-        Width = 227
-        Alignment = taRightJustify
-        Caption = 'https://github.com/VedVid/cctv-calculator'
-        ParentColor = False
       end
     end
     object ImageSizeTabSheet: TTabSheet
@@ -634,6 +598,108 @@ object MainForm: TMainForm
         Height = 1
         Top = 320
         Width = 1
+        ParentColor = False
+      end
+    end
+    object AboutTabSheet: TTabSheet
+      Caption = 'About'
+      ClientHeight = 572
+      ClientWidth = 456
+      object AboutScreenLabel1: TLabel
+        Left = 48
+        Height = 15
+        Top = 56
+        Width = 113
+        Caption = 'CCTV Calculator v 1.0'
+        ParentColor = False
+      end
+      object AboutScreenLabel2: TLabel
+        Left = 48
+        Height = 15
+        Top = 72
+        Width = 131
+        Caption = '64-bit build for Windows'
+        ParentColor = False
+      end
+      object AboutScreenLabel3: TLabel
+        Left = 48
+        Height = 15
+        Top = 88
+        Width = 212
+        Caption = 'Copyright (c) 2023, Tomasz Nowakowski'
+        ParentColor = False
+      end
+      object AboutScreenLabel5: TLabel
+        Left = 48
+        Height = 15
+        Top = 120
+        Width = 227
+        Alignment = taRightJustify
+        Caption = 'https://github.com/VedVid/cctv-calculator'
+        ParentColor = False
+      end
+      object AboutScreenLabel4: TLabel
+        Left = 48
+        Height = 15
+        Top = 104
+        Width = 165
+        Caption = 'Released under FreeBSD license'
+        ParentColor = False
+      end
+      object AboutScreenLabel6: TLabel
+        Left = 48
+        Height = 15
+        Top = 200
+        Width = 45
+        Caption = 'Caution!'
+        ParentColor = False
+      end
+      object AboutScreenLabel7: TLabel
+        Left = 48
+        Height = 15
+        Top = 217
+        Width = 281
+        Caption = 'This software is only intended to help by pointing out'
+        ParentColor = False
+      end
+      object AboutScreenLabel8: TLabel
+        Left = 48
+        Height = 15
+        Top = 233
+        Width = 292
+        Caption = ' the issues related to the specification and entered data.'
+        ParentColor = False
+      end
+      object AboutScreenLabel9: TLabel
+        Left = 48
+        Height = 15
+        Top = 249
+        Width = 273
+        Caption = 'It does not take into account variables like obstacles'
+        ParentColor = False
+      end
+      object AboutScreenLabel10: TLabel
+        Left = 48
+        Height = 15
+        Top = 265
+        Width = 306
+        Caption = 'between transmitter and receiver, legality of using specific'
+        ParentColor = False
+      end
+      object AboutScreenLabel11: TLabel
+        Left = 48
+        Height = 15
+        Top = 281
+        Width = 314
+        Caption = 'radio bands in your region, and other envionmental factors.'
+        ParentColor = False
+      end
+      object AboutScreenLabel12: TLabel
+        Left = 48
+        Height = 15
+        Top = 297
+        Width = 369
+        Caption = 'Always inspect installation place and devices specification by yourself!'
         ParentColor = False
       end
     end
