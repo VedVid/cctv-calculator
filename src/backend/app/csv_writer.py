@@ -24,7 +24,6 @@ def csv_bitrate_writer(per_camera: float, total: float) -> None:
 
 
 def csv_transmitters_writer(comments: list) -> None:
-    print(comments)
     with open("transmitters_validation.csv", mode="w") as f:
         f_writer = csv.writer(
             f, delimiter=",", quotechar='"', quoting=csv.QUOTE_MINIMAL
