@@ -68,10 +68,10 @@ if __name__ == "__main__":
             data = sql_reader.read_image_data(*bandwidth_caculator_args)
         except sqlite3.OperationalError as e:
             logging.critical(f"Fetching data unsuccessful, operation aborted.\n    {e}")
-            csv_error_writer(f"Fetching data unsuccessful, operation aborted.\n    {e}", "cameras_bandwidth.csv")
+            csv_error_writer("Fetching data unsuccessful, operation aborted.", "cameras_bandwidth.csv")
         except TypeError as e:
             logging.critical(f"No data fetched, operation aborted.")
-            csv_error_writer(f"No data fetched, operation aborted.", "cameras_bandwidth.csv")
+            csv_error_writer("No data fetched, operation aborted.", "cameras_bandwidth.csv")
         else:
             logging.info("    DONE.")
             logging.info("Calculating...")
@@ -90,10 +90,10 @@ if __name__ == "__main__":
             data = sql_reader.read_transmitters_data(*transmitters_calculator_args)
         except sqlite3.OperationalError as e:
             logging.critical(f"Fetching data unsuccessful, operation aborted.\n    {e}")
-            csv_error_writer(f"Fetching data unsuccessful, operation aborted.", "transmitters_validation.csv")
+            csv_error_writer("Fetching data unsuccessful, operation aborted.", "transmitters_validation.csv")
         except TypeError as e:
             logging.critical(f"No data fetched, operation aborted.\n    {e}")
-            csv_error_writer(f"No data fetched, operation aborted.", "transmitters_validation.csv")
+            csv_error_writer("No data fetched, operation aborted.", "transmitters_validation.csv")
         else:
             logging.info("    DONE.")
             logging.info("Validating...")
