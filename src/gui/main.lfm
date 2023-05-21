@@ -690,8 +690,8 @@ object MainForm: TMainForm
         Left = 48
         Height = 15
         Top = 320
-        Width = 317
-        Caption = ' radio bands in your region, and other envionmental factors.'
+        Width = 314
+        Caption = 'radio bands in your region, and other envionmental factors.'
         ParentColor = False
       end
       object AboutScreenLabel12: TLabel
