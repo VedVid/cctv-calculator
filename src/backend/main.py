@@ -108,3 +108,7 @@ if __name__ == "__main__":
             logging.info("    DONE.")
     else:
         logging.critical("Arguments passed to the application do not match any available schema.")
+        csv_error_writer("Arguments passed to the application do not match any available schema.",
+                         "cameras_bandwidth.csv")
+        csv_error_writer("Arguments passed to the application do not match any available schema.",
+                         "transmitters_validation.csv")
