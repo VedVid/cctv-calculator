@@ -698,8 +698,8 @@ object MainForm: TMainForm
         Left = 48
         Height = 15
         Top = 336
-        Width = 200
-        Caption = 'Always check things like that yourself!'
+        Width = 369
+        Caption = 'Always inspect installation place and devices specification by yourself!'
         ParentColor = False
       end
     end
