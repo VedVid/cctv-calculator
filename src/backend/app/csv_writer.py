@@ -30,3 +30,9 @@ def csv_transmitters_writer(comments: list) -> None:
         )
         for comment in comments:
             f_writer.writerow([comment])
+
+
+def csv_error_writer(txt: str, filename: str) -> None:
+    with open(filename, mode="w") as f:
+        f_writer = csv.writer(f)
+        f_writer.writerow([txt])
