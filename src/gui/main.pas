@@ -18,6 +18,7 @@ type
     FpsGroupBox: TGroupBox;
     InstallationDataGroupBox: TGroupBox;
     AverageDistanceLabel: TLabel;
+    Label5: TLabel;
     TransmittersDataLabel: TLabel;
     NumberOfReceiversLabel: TLabel;
     NumberOfTransmittersLabel: TLabel;
@@ -112,6 +113,7 @@ type
     procedure QcifRadioEnter(Sender: TObject);
     procedure SelectManufacturerListBoxSelectionChange(Sender: TObject;
       User: boolean);
+    procedure SelectModelListBoxSelectionChange(Sender: TObject; User: boolean);
     procedure TotalBitrateSpinEditChange(Sender: TObject);
 
   private
@@ -159,8 +161,9 @@ var
   flags: String = '';
   strs: TStringList;
 begin
-  flags := '-r ' + Resolution + ' -c ' + Compression + ' -q ' + Quality + ' -f ' + FPS + ' -m ' + NumberOfCameras;
-  SysUtils.ExecuteProcess('./cameras_bandwidth_calculator.exe', flags, []);
+  DeleteFile('cameras_bandwidth.csv');
+  flags := '--resolution ' + Resolution + ' --compression ' + Compression + ' --quality ' + Quality + ' --fps ' + FPS + ' --cameras ' + NumberOfCameras;
+  SysUtils.ExecuteProcess('./calcback.exe', flags, []);
   strs := tStringList.Create;
   strs.LoadFromFile('cameras_bandwidth.csv');
   MainForm.BitratePerCameraLabel.Caption := 'Bitrate per camera: ' + strs[0].Split(',')[0] + ' Mbps';
@@ -176,11 +179,17 @@ procedure TMainForm.CalculateButton2Click(Sender: TObject);
 var
   flags: String = '';
   strs: TStringList;
+  s: String = '';
 begin
-  flags := '-m ' + NumberOfCameras2 + ' -b ' + TotalBitrate2 + ' -t ' + NumberOfTransmitters + ' -e ' + NumberOfReceivers + ' -d ' + MaxDistance + ' -i ' + AverageDistance;
-  SysUtils.ExecuteProcess('./cameras_bandwidth_calculator.exe', flags, []);
+  DeleteFile('transmitters_validation.csv');
+  MainForm.Label5.Caption := '';
+  flags := '--cameras ' + NumberOfCameras2 + ' --bitrate ' + TotalBitrate2 + ' --transmitters ' + NumberOfTransmitters + ' --receivers ' + NumberOfReceivers + ' --distancemax ' + MaxDistance + ' --distanceaverage ' + AverageDistance + ' --manufacturer "' + CurrentManufacturer + '" --model "' + CurrentModel + '"';
+  //flags := '-m ' + NumberOfCameras2 + ' -b ' + TotalBitrate2 + ' -t ' + NumberOfTransmitters + ' -e ' + NumberOfReceivers + ' -d ' + MaxDistance + ' -i ' + AverageDistance + ' -a "' + CurrentManufacturer + '" -o "' + CurrentModel + '"';
+  SysUtils.ExecuteProcess('./calcback.exe', flags, []);
   strs := TStringList.Create;
   strs.LoadFromFile('transmitters_validation.csv');
+  for s in strs do
+    MainForm.Label5.Caption := MainForm.Label5.Caption + LineEnding + s;
 end;
 
 
@@ -202,8 +211,17 @@ begin
   CurrentManufacturer := MainForm.SelectManufacturerListBox.Items[MainForm.SelectManufacturerListBox.ItemIndex];
   MainForm.SelectModelListBox.Clear;
   if CurrentManufacturer = 'CAMSAT' then
-    for model in CamsatModels do
-      MainForm.SelectModelListBox.Items.Add(model);
+    begin
+      for model in CamsatModels do
+        MainForm.SelectModelListBox.Items.Add(model);
+      MainForm.SelectModelListBox.ItemIndex := 0;
+    end;
+end;
+
+procedure TMainForm.SelectModelListBoxSelectionChange(Sender: TObject;
+  User: boolean);
+begin
+  CurrentModel := MainForm.SelectModelListBox.Items[MainForm.SelectModelListBox.ItemIndex];
 end;
 
 procedure TMainForm.TotalBitrateSpinEditChange(Sender: TObject);
