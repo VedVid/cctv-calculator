@@ -116,16 +116,18 @@ class SqlReader:
     def _find_transmitter_data(self, manufacturer: str, model: str) -> dict:
         d = {}
         self.connector.cur.execute(
-            "SELECT range_max, value_max, cameras, max_tx_to_rx, channels_all, channels_ce FROM transmitters WHERE manufacturer LIKE ? AND model LIKE ?",
+            "SELECT range_max, value_max, range_min, value_min, cameras, max_tx_to_rx, channels_all, channels_ce FROM transmitters WHERE manufacturer LIKE ? AND model LIKE ?",
             (manufacturer, model),
         )
         data = self.connector.cur.fetchone()
         d["max_distance_between_tx_and_rx"] = data[0]
         d["max_bitrate"] = data[1]
-        d["max_cameras_for_single_transmitter"] = data[2]
-        d["max_tx_to_rx"] = data[3]
-        d["no_of_channels"] = data[4]
-        d["no_of_ce_channels"] = data[5]
+        d["min_tested_distance"] = data[2]
+        d["min_bitrate"] = data[3]
+        d["max_cameras_for_single_transmitter"] = data[4]
+        d["max_tx_to_rx"] = data[5]
+        d["no_of_channels"] = data[6]
+        d["no_of_ce_channels"] = data[7]
         return d
 
     def _find_resolution_id(self, resolution_name: str) -> int:
