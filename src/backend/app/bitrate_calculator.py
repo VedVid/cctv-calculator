@@ -20,6 +20,6 @@ def calculate(**data_dict):
     total = 1
     for arg in data_dict.values():
         total *= arg
-    bandwidth["total"] = total
-    bandwidth["per_camera"] = total / data_dict["no_of_cameras"]
+    bandwidth["total"] = total / 100  # Because fps is in KB and we want Mb.
+    bandwidth["per_camera"] = total / 100 / data_dict["no_of_cameras"]
     return bandwidth
