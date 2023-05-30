@@ -342,7 +342,7 @@ object MainForm: TMainForm
         Height = 25
         Top = 488
         Width = 448
-        Caption = 'Calculate!'
+        Caption = 'Calculate'
         OnClick = CalculateButtonClick
         TabOrder = 4
       end
@@ -582,7 +582,7 @@ object MainForm: TMainForm
         Height = 25
         Top = 272
         Width = 448
-        Caption = 'Calculate'
+        Caption = 'Validate'
         OnClick = CalculateButton2Click
         TabOrder = 2
       end
