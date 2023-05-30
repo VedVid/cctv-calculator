@@ -42,7 +42,7 @@ object MainForm: TMainForm
       object StartScreenLogo2Label: TLabel
         Left = 6
         Height = 23
-        Top = 216
+        Top = 208
         Width = 442
         Alignment = taCenter
         AutoSize = False
