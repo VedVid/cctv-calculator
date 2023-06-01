@@ -45,7 +45,7 @@ def validate(**data_dict):
     # Check if the distance is not too great for tx+rx to work well.
     if data_dict["max_distance"] > data_dict["max_distance_between_tx_and_rx"]:
         comments.append(
-            f"The distance between the furthest points ({data_dict['max_distance']} m) is too large (max {data_dict['max_distance_between_tx_and_rx']} m)"
+            f"The distance between the furthest points ({data_dict['max_distance']} m) is too large (max {data_dict['max_distance_between_tx_and_rx']} m)."
         )
 
     # Check the distances and bitrate.
