@@ -39,7 +39,7 @@ def validate(**data_dict):
         > data_dict["no_of_receivers"] * data_dict["max_tx_to_rx"]
     ):
         comments.append(
-            f"There is not enough receivers ({data_dict['no_of_receivers']}) to connect all transmitters ({data_dict['no_of_transmitters']}, max {data_dict['max_tx_to_rx']} tx to 1 rx)."
+            f"There is not enough receivers ({data_dict['no_of_receivers']}) to connect all transmitters ({data_dict['no_of_transmitters']}; max {data_dict['max_tx_to_rx']} tx to 1 rx)."
         )
 
     # Check if the distance is not too great for tx+rx to work well.
