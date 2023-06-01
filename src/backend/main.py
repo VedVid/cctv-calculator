@@ -37,6 +37,10 @@ if __name__ == "__main__":
     argparser.add_argument("-a", "--manufacturer", type=str)
     argparser.add_argument("-o", "--model", type=str)
     args = argparser.parse_args()
+    if args.distancemax == 0:
+        args.distancemax = "0"
+    if args.distanceaverage == 0:
+        args.distanceaverage = "0"
     logging.info("    DONE.")
     logging.info("The parameters passed:")
     logging.info(f"    {args}.")

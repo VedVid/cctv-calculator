@@ -43,7 +43,7 @@ def validate(**data_dict):
         )
 
     # Check if the distance is not too great for tx+rx to work well.
-    if data_dict["max_distance"] > data_dict["max_distance_between_tx_and_rx"]:
+    if int(data_dict["max_distance"]) > data_dict["max_distance_between_tx_and_rx"]:
         comments.append(
             f"The distance between the furthest points ({data_dict['max_distance']} m) is too large (max {data_dict['max_distance_between_tx_and_rx']} m)."
         )
@@ -56,7 +56,7 @@ def validate(**data_dict):
         / 100
     )
     total_available_bitrate = data_dict["max_bitrate"] - (
-        (data_dict["average_distance"] / 100) * average_available_bitrate
+        (int(data_dict["average_distance"]) / 100) * average_available_bitrate
     )
     if total_available_bitrate < data_dict["total_bitrate"]:
         comments.append(
