@@ -14,11 +14,13 @@ from app.sql_reader import SqlReader
 
 
 if __name__ == "__main__":
-    logging.basicConfig(filename="cctv_calculator.log",
-                        filemode='w',
-                        format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
-                        datefmt='%H:%M:%S',
-                        level=logging.INFO)
+    logging.basicConfig(
+        filename="cctv_calculator.log",
+        filemode="w",
+        format="%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s",
+        datefmt="%H:%M:%S",
+        level=logging.INFO,
+    )
     logging.info("Running cctv calculator cli app.")
     logging.info("Parsing arguments...")
     argparser = argparse.ArgumentParser()
@@ -35,6 +37,10 @@ if __name__ == "__main__":
     argparser.add_argument("-a", "--manufacturer", type=str)
     argparser.add_argument("-o", "--model", type=str)
     args = argparser.parse_args()
+    if args.distancemax == 0:
+        args.distancemax = "0"
+    if args.distanceaverage == 0:
+        args.distanceaverage = "0"
     logging.info("    DONE.")
     logging.info("The parameters passed:")
     logging.info(f"    {args}.")
@@ -68,10 +74,15 @@ if __name__ == "__main__":
             data = sql_reader.read_image_data(*bandwidth_caculator_args)
         except sqlite3.OperationalError as e:
             logging.critical(f"Fetching data unsuccessful, operation aborted.\n    {e}")
-            csv_error_writer("Fetching data unsuccessful, operation aborted.", "cameras_bandwidth.csv")
+            csv_error_writer(
+                "Fetching data unsuccessful, operation aborted.",
+                "cameras_bandwidth.csv",
+            )
         except TypeError as e:
             logging.critical(f"No data fetched, operation aborted.")
-            csv_error_writer("No data fetched, operation aborted.", "cameras_bandwidth.csv")
+            csv_error_writer(
+                "No data fetched, operation aborted.", "cameras_bandwidth.csv"
+            )
         else:
             logging.info("    DONE.")
             logging.info("Calculating...")
@@ -90,10 +101,15 @@ if __name__ == "__main__":
             data = sql_reader.read_transmitters_data(*transmitters_calculator_args)
         except sqlite3.OperationalError as e:
             logging.critical(f"Fetching data unsuccessful, operation aborted.\n    {e}")
-            csv_error_writer("Fetching data unsuccessful, operation aborted.", "transmitters_validation.csv")
+            csv_error_writer(
+                "Fetching data unsuccessful, operation aborted.",
+                "transmitters_validation.csv",
+            )
         except TypeError as e:
             logging.critical(f"No data fetched, operation aborted.\n    {e}")
-            csv_error_writer("No data fetched, operation aborted.", "transmitters_validation.csv")
+            csv_error_writer(
+                "No data fetched, operation aborted.", "transmitters_validation.csv"
+            )
         else:
             logging.info("    DONE.")
             logging.info("Validating...")
@@ -107,8 +123,14 @@ if __name__ == "__main__":
             sql_reader.connector.close()
             logging.info("    DONE.")
     else:
-        logging.critical("Arguments passed to the application do not match any available schema.")
-        csv_error_writer("Arguments passed to the application do not match any available schema.",
-                         "cameras_bandwidth.csv")
-        csv_error_writer("Arguments passed to the application do not match any available schema.",
-                         "transmitters_validation.csv")
+        logging.critical(
+            "Arguments passed to the application do not match any available schema."
+        )
+        csv_error_writer(
+            "Arguments passed to the application do not match any available schema.",
+            "cameras_bandwidth.csv",
+        )
+        csv_error_writer(
+            "Arguments passed to the application do not match any available schema.",
+            "transmitters_validation.csv",
+        )

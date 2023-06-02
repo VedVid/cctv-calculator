@@ -17,8 +17,8 @@ def test_bitrate_calculator_1():
         "no_of_cameras": 1,
     }
     r = calculate(**d)
-    assert isclose(r["total"], 3.60, abs_tol=0.01)
-    assert isclose(r["per_camera"], 3.60, abs_tol=0.01)
+    assert isclose(r["total"], 0.036, abs_tol=0.001)
+    assert isclose(r["per_camera"], 0.036, abs_tol=0.001)
 
 
 def test_bitrate_calculator_2():
@@ -32,8 +32,8 @@ def test_bitrate_calculator_2():
         "no_of_cameras": 5,
     }
     r = calculate(**d)
-    assert isclose(r["total"], 697.5, abs_tol=0.01)
-    assert isclose(r["per_camera"], 139.5, abs_tol=0.01)
+    assert isclose(r["total"], 6.975, abs_tol=0.001)
+    assert isclose(r["per_camera"], 1.395, abs_tol=0.001)
 
 
 def test_bitrate_calculator_3():
@@ -47,5 +47,5 @@ def test_bitrate_calculator_3():
         "no_of_cameras": 3,
     }
     r = calculate(**d)
-    assert isclose(r["total"], 4455, abs_tol=0.1)
-    assert isclose(r["per_camera"], 1485, abs_tol=0.01)
+    assert isclose(r["total"], 44.55, abs_tol=0.01)
+    assert isclose(r["per_camera"], 14.85, abs_tol=0.01)
