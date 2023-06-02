@@ -1,21 +1,63 @@
-object Form1: TForm1
-  Left = 565
-  Height = 602
-  Top = 109
-  Width = 466
-  Caption = 'CCTV Calculator v1.0'
-  ClientHeight = 602
-  ClientWidth = 466
+object MainForm: TMainForm
+  Left = 1255
+  Height = 597
+  Top = 227
+  Width = 456
+  BorderStyle = bsSingle
+  Caption = 'CCTV Calculator v2.0'
+  ClientHeight = 597
+  ClientWidth = 456
   Position = poScreenCenter
-  LCLVersion = '2.0.8.0'
+  LCLVersion = '2.2.4.0'
   object PageControl1: TPageControl
     Left = 0
     Height = 600
     Top = 0
     Width = 464
-    ActivePage = ImageSizeTabSheet
+    ActivePage = StartScreenTabSheet
     TabIndex = 0
     TabOrder = 0
+    object StartScreenTabSheet: TTabSheet
+      Caption = 'Start'
+      ClientHeight = 572
+      ClientWidth = 456
+      object StartScreenLogo1Label: TLabel
+        Left = 6
+        Height = 73
+        Top = 136
+        Width = 442
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'CCTV'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -64
+        Font.Name = 'Liberation Sans'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Font.Style = [fsBold, fsItalic]
+        ParentColor = False
+        ParentFont = False
+      end
+      object StartScreenLogo2Label: TLabel
+        Left = 6
+        Height = 23
+        Top = 208
+        Width = 442
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'CALCULATOR'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -19
+        Font.Name = 'Iosevka Fixed Medium'
+        Font.Pitch = fpFixed
+        Font.Quality = fqDraft
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+    end
     object ImageSizeTabSheet: TTabSheet
       Caption = 'Image size'
       ClientHeight = 572
@@ -300,7 +342,7 @@ object Form1: TForm1
         Height = 25
         Top = 488
         Width = 448
-        Caption = 'Calculate!'
+        Caption = 'Calculate'
         OnClick = CalculateButtonClick
         TabOrder = 4
       end
@@ -359,6 +401,305 @@ object Form1: TForm1
         Top = 552
         Width = 68
         Caption = 'Total bitrate: '
+        ParentColor = False
+      end
+    end
+    object TransmittersTabSheet: TTabSheet
+      Caption = 'Transmitters'
+      ClientHeight = 572
+      ClientWidth = 456
+      object SelectTransmitterGroupBox: TGroupBox
+        Left = 0
+        Height = 112
+        Top = 8
+        Width = 448
+        Caption = 'Select Transmitter'
+        ClientHeight = 92
+        ClientWidth = 444
+        TabOrder = 0
+        object SelectModelListBox: TListBox
+          Left = 128
+          Height = 56
+          Top = 24
+          Width = 308
+          ItemHeight = 0
+          OnSelectionChange = SelectModelListBoxSelectionChange
+          TabOrder = 0
+        end
+        object SelectManufacturerListBox: TListBox
+          Left = 8
+          Height = 56
+          Top = 24
+          Width = 100
+          Items.Strings = (
+            'CAMSAT'
+          )
+          ItemHeight = 15
+          OnSelectionChange = SelectManufacturerListBoxSelectionChange
+          TabOrder = 1
+        end
+        object ManufacturerLabel: TLabel
+          Left = 8
+          Height = 15
+          Top = 4
+          Width = 72
+          Caption = 'Manufacturer'
+          ParentColor = False
+        end
+        object ModelLabel: TLabel
+          Left = 128
+          Height = 15
+          Top = 4
+          Width = 34
+          Caption = 'Model'
+          ParentColor = False
+        end
+      end
+      object InstallationDataGroupBox: TGroupBox
+        Left = 0
+        Height = 128
+        Top = 128
+        Width = 448
+        Caption = 'Set installation data'
+        ClientHeight = 108
+        ClientWidth = 444
+        TabOrder = 1
+        object NumberOfCamerasSpinEdit: TSpinEdit
+          Left = 152
+          Height = 23
+          Top = 8
+          Width = 50
+          MaxValue = 99
+          MinValue = 1
+          OnChange = NumberOfCamerasSpinEditChange
+          TabOrder = 0
+          Value = 1
+        end
+        object TotalBitrateSpinEdit: TSpinEdit
+          Left = 152
+          Height = 23
+          Top = 40
+          Width = 50
+          MaxValue = 999
+          MinValue = 1
+          OnChange = TotalBitrateSpinEditChange
+          TabOrder = 1
+          Value = 1
+        end
+        object MaxDistanceSpinEdit: TSpinEdit
+          Left = 152
+          Height = 23
+          Top = 72
+          Width = 50
+          Increment = 100
+          MaxValue = 10000
+          OnChange = MaxDistanceSpinEditChange
+          TabOrder = 2
+        end
+        object NumberOfTransmittersSpinEdit: TSpinEdit
+          Left = 386
+          Height = 23
+          Top = 8
+          Width = 50
+          MaxValue = 99
+          MinValue = 1
+          OnChange = NumberOfTransmittersSpinEditChange
+          TabOrder = 3
+          Value = 1
+        end
+        object TotalCamerasLabel: TLabel
+          Left = 8
+          Height = 15
+          Top = 8
+          Width = 105
+          Caption = 'Number of cameras'
+          ParentColor = False
+        end
+        object TotalBitrateLabel2: TLabel
+          Left = 8
+          Height = 15
+          Top = 40
+          Width = 62
+          Caption = 'Total bitrate'
+          ParentColor = False
+        end
+        object MaxDistanceLabel: TLabel
+          Left = 8
+          Height = 15
+          Top = 72
+          Width = 122
+          Caption = 'Max distance in meters'
+          ParentColor = False
+        end
+        object NumberOfTransmittersLabel: TLabel
+          Left = 248
+          Height = 15
+          Top = 8
+          Width = 124
+          Caption = 'Number of transmitters'
+          ParentColor = False
+        end
+        object NumberOfReceiversLabel: TLabel
+          Left = 248
+          Height = 15
+          Top = 40
+          Width = 107
+          Caption = 'Number of receivers'
+          ParentColor = False
+        end
+        object NumberOfReceiversSpinEdit: TSpinEdit
+          Left = 386
+          Height = 23
+          Top = 40
+          Width = 50
+          MaxValue = 99
+          MinValue = 1
+          OnChange = NumberOfReceiversSpinEditChange
+          TabOrder = 4
+          Value = 1
+        end
+        object AverageDistanceSpinEdit: TSpinEdit
+          Left = 386
+          Height = 23
+          Top = 72
+          Width = 50
+          Increment = 100
+          MaxValue = 10000
+          OnChange = AverageDistanceSpinEditChange
+          TabOrder = 5
+        end
+        object AverageDistanceLabel: TLabel
+          Left = 248
+          Height = 15
+          Top = 72
+          Width = 112
+          Caption = 'Average distance (m)'
+          ParentColor = False
+        end
+      end
+      object CalculateButton2: TButton
+        Left = 0
+        Height = 25
+        Top = 272
+        Width = 448
+        Caption = 'Validate'
+        OnClick = CalculateButton2Click
+        TabOrder = 2
+      end
+      object TransmittersDataLabel: TLabel
+        Left = 0
+        Height = 1
+        Top = 312
+        Width = 1
+        ParentColor = False
+      end
+      object Label5: TLabel
+        Left = 0
+        Height = 1
+        Top = 320
+        Width = 1
+        ParentColor = False
+      end
+    end
+    object AboutTabSheet: TTabSheet
+      Caption = 'About'
+      ClientHeight = 572
+      ClientWidth = 456
+      object AboutScreenLabel1: TLabel
+        Left = 48
+        Height = 15
+        Top = 56
+        Width = 113
+        Caption = 'CCTV Calculator v 2.0'
+        ParentColor = False
+      end
+      object AboutScreenLabel2: TLabel
+        Left = 48
+        Height = 15
+        Top = 72
+        Width = 131
+        Caption = '64-bit build for Windows'
+        ParentColor = False
+      end
+      object AboutScreenLabel3: TLabel
+        Left = 48
+        Height = 15
+        Top = 88
+        Width = 212
+        Caption = 'Copyright (c) 2023, Tomasz Nowakowski'
+        ParentColor = False
+      end
+      object AboutScreenLabel5: TLabel
+        Left = 48
+        Height = 15
+        Top = 120
+        Width = 227
+        Alignment = taRightJustify
+        Caption = 'https://github.com/VedVid/cctv-calculator'
+        ParentColor = False
+      end
+      object AboutScreenLabel4: TLabel
+        Left = 48
+        Height = 15
+        Top = 104
+        Width = 165
+        Caption = 'Released under FreeBSD license'
+        ParentColor = False
+      end
+      object AboutScreenLabel6: TLabel
+        Left = 48
+        Height = 15
+        Top = 200
+        Width = 45
+        Caption = 'Caution!'
+        ParentColor = False
+      end
+      object AboutScreenLabel7: TLabel
+        Left = 48
+        Height = 15
+        Top = 217
+        Width = 281
+        Caption = 'This software is only intended to help by pointing out'
+        ParentColor = False
+      end
+      object AboutScreenLabel8: TLabel
+        Left = 48
+        Height = 15
+        Top = 233
+        Width = 292
+        Caption = ' the issues related to the specification and entered data.'
+        ParentColor = False
+      end
+      object AboutScreenLabel9: TLabel
+        Left = 48
+        Height = 15
+        Top = 249
+        Width = 273
+        Caption = 'It does not take into account variables like obstacles'
+        ParentColor = False
+      end
+      object AboutScreenLabel10: TLabel
+        Left = 48
+        Height = 15
+        Top = 265
+        Width = 306
+        Caption = 'between transmitter and receiver, legality of using specific'
+        ParentColor = False
+      end
+      object AboutScreenLabel11: TLabel
+        Left = 48
+        Height = 15
+        Top = 281
+        Width = 314
+        Caption = 'radio bands in your region, and other envionmental factors.'
+        ParentColor = False
+      end
+      object AboutScreenLabel12: TLabel
+        Left = 48
+        Height = 15
+        Top = 297
+        Width = 369
+        Caption = 'Always inspect installation place and devices specification by yourself!'
         ParentColor = False
       end
     end

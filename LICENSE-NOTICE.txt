@@ -1,0 +1,42 @@
+CCTV Calculator has been created using various software and libraries. Full licenses are available inside "licenses" directory.
+
+1. Lazarus
+   version 2.2.4
+   RAD IDE for Free Pascal
+   GNU GPL v2, GNU LGPL with static linking exception
+   https://www.lazarus-ide.org/
+
+2. Free Pascal
+   version 3.2.2
+   Pascal compiler
+   GNU GPL v2, Library GNU GPL with linking exception
+
+3. CPython
+   version 3.8.9
+   Implementation of Python programming language
+   PSF license
+   
+4. WinPython
+   version WPy64-3890
+   Portable distribution of Python programming language
+   MIT license
+
+5. Nuitka
+   version 1.2 Standard
+   Python compiler  
+   Apache 2.0
+
+5. Nuwen distro with GCC and mingw-w64
+   version:
+      distro:    18.0
+      GCC:       11.2.0
+      mingw-w64: 9.0.0
+   license:
+      distro:    N/A
+      GCC:       GNU GPL v3 with GCC Runtime Library Exception version 3.1
+      mingw-w64: Zope Public License 2.1, Public Domain, BSD, LGPL
+   
+6. SQLite
+   version 3.38.5
+   Database engine
+   Public Domain

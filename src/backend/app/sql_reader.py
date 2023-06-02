@@ -32,7 +32,8 @@ class SqlReader:
         no_of_cameras: int,
     ) -> dict:
         """
-        Fetches the data from a database and stores it in the dictionary that is later returned.
+        Fetches the data related to the image size and quality from a database
+        and stores it in the dictionary that is later returned.
 
         Parameters
         ----------
@@ -50,7 +51,8 @@ class SqlReader:
         Returns
         -------
         d : dict
-            Dictionary with data fetched from dictionary. May be empty if fetching data failed.
+            Dictionary with data fetched from dictionary. Includes also some data passed by the GUI.
+            May be empty if fetching data failed.
         """
         d = {}
         resolution_id = self._find_resolution_id(resolution)
@@ -59,6 +61,73 @@ class SqlReader:
         d["quality_factor"] = self._find_quality_factor(quality)
         d["fps"] = fps
         d["no_of_cameras"] = no_of_cameras
+        return d
+
+    def read_transmitters_data(
+        self,
+        manufacturer: str,
+        model: str,
+        no_of_cameras: int,
+        total_bitrate: int,
+        no_of_transmitters: int,
+        no_of_receivers: int,
+        max_distance: int,
+        average_distance: int,
+    ) -> dict:
+        """
+        Fetches the data related to the transmitters from a database,
+        and stores it in the dictionary that is later returned.
+        Said dictionary includes also data passed from the GUI.
+
+        Parameters
+        ----------
+        manufacturer : str
+            The brand of the transmitter.
+        model : str
+            The exact model of the transmitter.
+        no_of_cameras : int
+            Number of cameras in the installation.
+        total_bitrate : int
+            Total bitrate to be sent by transmitters.
+        no_of_transmitters : int
+            Amount of transmitters in the installation.
+        no_of_receivers : int
+            Amount of receivers in the installation
+        max_distance : int
+            The longest distance (in meters) between transmitter and receiver.
+        average_distance : int
+            Average distance (in meters) between transmitter and receiver.
+
+        Returns
+        -------
+        d : dict
+            Dictionary with data fetched from dictionary. Includes also some data passed by the GUI.
+            May be empty if fetching data failed.
+        """
+        d = self._find_transmitter_data(manufacturer, model)
+        d["no_of_cameras"] = no_of_cameras
+        d["total_bitrate"] = total_bitrate
+        d["no_of_transmitters"] = no_of_transmitters
+        d["no_of_receivers"] = no_of_receivers
+        d["max_distance"] = max_distance
+        d["average_distance"] = average_distance
+        return d
+
+    def _find_transmitter_data(self, manufacturer: str, model: str) -> dict:
+        d = {}
+        self.connector.cur.execute(
+            "SELECT range_max, value_max, range_min, value_min, cameras, max_tx_to_rx, channels_all, channels_ce FROM transmitters WHERE manufacturer LIKE ? AND model LIKE ?",
+            (manufacturer, model),
+        )
+        data = self.connector.cur.fetchone()
+        d["max_distance_between_tx_and_rx"] = data[0]
+        d["max_bitrate"] = data[1]
+        d["min_tested_distance"] = data[2]
+        d["min_bitrate"] = data[3]
+        d["max_cameras_for_single_transmitter"] = data[4]
+        d["max_tx_to_rx"] = data[5]
+        d["no_of_channels"] = data[6]
+        d["no_of_ce_channels"] = data[7]
         return d
 
     def _find_resolution_id(self, resolution_name: str) -> int:
