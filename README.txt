@@ -18,7 +18,7 @@ For more info, you can call the program with --help flag.
 
 Will there be a Linux release?
 ------------------------------
-Yes, a Linux release will be available in the near future. At the moment, you can compile the program yourself - the source code is available at https://github.com/VedVid/cctv-calculator
+A release for Ubuntu is planned for the version 2.1. In the future, I will try to provide a distro-agnostic release. At the moment, you can compile the program yourself - the source code is available at https://github.com/VedVid/cctv-calculator
 
 Will there be a Mac release?
 ----------------------------
